@@ -1,0 +1,40 @@
+{
+  "name": "whatsplayingbot",
+  "version": "0.0.1",
+  "description": "Last.fm bot for Telegram",
+  "author": "Lewis Chan",
+  "license": "MIT",
+  "homepage": "https://github.com/lewisgauss/whatsplayingbot#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewisgauss/whatsplayingbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lewisgauss/whatsplayingbot/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.0",
+    "prettier": "2.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.1",
+    "node-telegram-bot-api": "^0.53.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --config .prettierrc.json --write --ignore-unknown",
+    "*.{js}": "eslint . --ext .js"
+  }
+}
