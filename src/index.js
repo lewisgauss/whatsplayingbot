@@ -1,4 +1,4 @@
-import environment from './environment';
+import environment from './helpers/environment';
 import bot from './bot';
 
 console.info("Starting What's Playing Bot...");

@@ -1,6 +1,6 @@
 import TelegramBot from 'node-telegram-bot-api';
-import environment from './environment';
-import redisClient from './redisClient';
+import environment from './helpers/environment';
+import redisClient from './helpers/redisClient';
 import LastFM from './LastFM';
 import Users from './Users';
 

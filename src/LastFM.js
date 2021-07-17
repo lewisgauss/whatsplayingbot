@@ -1,4 +1,4 @@
-import fetch from './fetch';
+import fetch from './helpers/fetch';
 import endpoints from './endpoints';
 
 class LastFM {
