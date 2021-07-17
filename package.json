@@ -15,8 +15,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "prepare": "husky install",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "eslint": "^7.2.0",
