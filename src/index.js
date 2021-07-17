@@ -1,7 +1,8 @@
-import environment from './helpers/environment';
+import environment from './environment';
+import bot from './bot';
+
+console.info("Starting What's Playing Bot...");
 
 environment.configure();
 
-console.log(environment.get());
-
-console.log('Hello');
+bot();
