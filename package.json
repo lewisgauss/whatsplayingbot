@@ -12,22 +12,20 @@
   "bugs": {
     "url": "https://github.com/lewisgauss/whatsplayingbot/issues"
   },
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node --es-module-specifier-resolution=node ./src/index.js",
     "prepare": "husky install"
   },
   "devDependencies": {
     "eslint": "^7.2.0",
-    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
-    "prettier": "2.3.2",
-    "husky": "^7.0.1"
+    "prettier": "2.3.2"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
@@ -36,6 +34,6 @@
   },
   "lint-staged": {
     "**/*": "prettier --config .prettierrc.json --write --ignore-unknown",
-    "*.{js}": "eslint . --ext .js"
+    "*.{js,ts}": "eslint . --ext .js,.ts"
   }
 }
