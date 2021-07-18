@@ -13,6 +13,9 @@
     "url": "https://github.com/lewisgauss/whatsplayingbot/issues"
   },
   "main": "./src/index.ts",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "tsc",
     "debug": "NODE_ENV=development ts-node ./src/index.ts",
