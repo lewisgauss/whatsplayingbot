@@ -5,6 +5,8 @@ export interface IEnvironment {
   readonly nodeEnv: string;
   readonly herokuUrl: string;
   readonly redisToGoUrl: string;
+  readonly port: number;
+  readonly host: string;
 }
 
 declare module 'redis' {
