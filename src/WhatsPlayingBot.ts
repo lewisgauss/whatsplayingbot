@@ -113,7 +113,7 @@ class WhatsPlayingBot extends TelegramBot {
 
     await this.redisClient.setAsync(telegramUsername, lastFmUsername);
 
-    const replyMessage = `Las FM username ${lastFmUsername} is set for ${replyName}.`;
+    const replyMessage = `Last FM username ${lastFmUsername} is set for ${replyName}.`;
 
     this.sendMessage(chatId, replyMessage);
   }
