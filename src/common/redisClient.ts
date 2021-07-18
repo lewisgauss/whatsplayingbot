@@ -11,7 +11,7 @@ const create = (): redis.RedisClient => {
   if (environmentConfigured.nodeEnv === 'production') {
     const rtg = url.parse(environmentConfigured.redisToGoUrl);
 
-    const port = +!rtg.port;
+    const port = rtg.port ? +rtg.port : 0;
 
     client = redis.createClient(port, rtg.hostname || undefined);
   } else {
