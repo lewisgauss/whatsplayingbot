@@ -49,7 +49,7 @@ class WhatsPlayingBot extends TelegramBot {
     const allowedChat = this.isChatIdValid(chatId);
 
     if (!allowedChat) {
-      console.info(`Chat not allowed for ${chatId}.`);
+      console.log(`Chat not allowed for ${chatId}.`);
 
       return;
     }
@@ -65,7 +65,7 @@ class WhatsPlayingBot extends TelegramBot {
     const allowedChat = this.isChatIdValid(chatId);
 
     if (!allowedChat) {
-      console.info(`Chat not allowed for ${chatId}.`);
+      console.log(`Chat not allowed for ${chatId}.`);
 
       return;
     }
@@ -90,7 +90,7 @@ class WhatsPlayingBot extends TelegramBot {
     const allowedChat = this.isChatIdValid(chatId);
 
     if (!allowedChat) {
-      console.info(`Chat not allowed for ${chatId}.`);
+      console.log(`Chat not allowed for ${chatId}.`);
 
       return;
     }
@@ -125,7 +125,7 @@ class WhatsPlayingBot extends TelegramBot {
     const allowedChat = this.isChatIdValid(chatId);
 
     if (!allowedChat) {
-      console.info(`Chat not allowed for ${chatId}.`);
+      console.log(`Chat not allowed for ${chatId}.`);
 
       return;
     }
@@ -158,7 +158,7 @@ class WhatsPlayingBot extends TelegramBot {
     const allowedChat = this.isChatIdValid(chatId);
 
     if (!allowedChat) {
-      console.info(`Chat not allowed for ${chatId}.`);
+      console.log(`Chat not allowed for ${chatId}.`);
 
       return;
     }
