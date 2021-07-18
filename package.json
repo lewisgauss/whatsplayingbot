@@ -16,7 +16,8 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node ./src/index.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prettier": "prettier --config .prettierrc.json --write \"src/**/*{.ts,.js}\""
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.1",
@@ -44,7 +45,6 @@
     "redis": "^3.1.2"
   },
   "lint-staged": {
-    "prettier": "prettier --config .prettierrc.json --write \"src/**/*{.ts,.js}\"",
     "*.{js,ts}": "eslint . --ext .js,.ts"
   }
 }
