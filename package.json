@@ -44,7 +44,7 @@
     "redis": "^3.1.2"
   },
   "lint-staged": {
-    "**/*": "prettier --config .prettierrc.json --write --ignore-unknown",
+    "prettier": "prettier --config .prettierrc.json --write \"src/**/*{.ts,.js}\"",
     "*.{js,ts}": "eslint . --ext .js,.ts"
   }
 }
