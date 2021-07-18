@@ -3,10 +3,10 @@
 NVM_RC_FILE = .nvmrc
 NODE_VERSION_FROM_NVM = ${shell cat ${NVM_RC_FILE}}
 
-.PHONY: start
-start: ensure-node-version
+.PHONY: debug
+debug: ensure-node-version
 		@echo "Starting What's Playing Bot in debug mode..."
-		yarn start
+		yarn debug
 
 .PHONY: ensure-node-version
 ensure-node-version:

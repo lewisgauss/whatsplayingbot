@@ -15,9 +15,10 @@
   "main": "./src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node ./src/index.ts",
+    "debug": "ts-node ./src/index.ts",
     "prepare": "husky install",
-    "prettier": "prettier --config .prettierrc.json --write \"src/**/*{.ts,.js}\""
+    "prettier": "prettier --config .prettierrc.json --write \"src/**/*{.ts,.js}\"",
+    "start": "node ./build/index.js"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.1",
