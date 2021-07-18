@@ -1,24 +1,24 @@
 import fetch from 'node-fetch';
 
-const get = async (url) => {
+const get = async <T>(url: string): Promise<T> => {
   try {
     const encodedUrl = encodeURI(url);
 
     const response = await fetch(encodedUrl);
 
     if (!response.ok) {
-      return null;
+      throw new Error(`Response not OK: ${response}`);
     }
 
     const json = await response.json();
 
-    console.log(json);
+    console.log(JSON.stringify(json));
 
     return json;
-  } catch (exception) {
-    console.error(exception);
+  } catch (error) {
+    console.error(error);
 
-    return null;
+    throw error;
   }
 };
 
