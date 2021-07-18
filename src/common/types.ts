@@ -4,6 +4,7 @@ export interface IEnvironment {
   readonly lastFmSecretKey: string;
   readonly nodeEnv: string;
   readonly herokuUrl: string;
+  readonly redisToGoUrl: string;
 }
 
 declare module 'redis' {

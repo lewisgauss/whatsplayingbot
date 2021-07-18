@@ -9,6 +9,7 @@ const get = (): IEnvironment => ({
   lastFmSecretKey: process.env.LAST_FM_SHARED_SECRET || '',
   nodeEnv: process.env.NODE_ENV || 'development',
   herokuUrl: process.env.HEROKU_URL || '',
+  redisToGoUrl: process.env.REDISTOGO_URL || '',
 });
 
 export default {
