@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-
-import fs from 'fs';
+const fs = require('fs');
 
 const nvmVersion = fs.readFileSync('.nvmrc').toString().trim();
 const desired = `v${nvmVersion}`;

@@ -10,4 +10,14 @@ start: ensure-node-version
 
 .PHONY: ensure-node-version
 ensure-node-version:
-		@npx ts-node ./scripts/ensureNodeVersion
+		@node ./scripts/ensureNodeVersion
+
+.PHONY: reset
+reset: ensure-node-version
+		@echo "Deleting node_modules folder..."
+		rm -rf node_modules
+
+.PHONY: delete-build
+delete-build: ensure-node-version
+		@echo "Deleting build folder..."
+		rm -rf build
