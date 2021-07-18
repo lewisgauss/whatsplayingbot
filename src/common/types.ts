@@ -2,6 +2,8 @@ export interface IEnvironment {
   readonly telegramBotToken: string;
   readonly lastFmApiKey: string;
   readonly lastFmSecretKey: string;
+  readonly nodeEnv: string;
+  readonly herokuUrl: string;
 }
 
 declare module 'redis' {
