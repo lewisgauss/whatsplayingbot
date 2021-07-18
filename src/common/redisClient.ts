@@ -14,6 +14,10 @@ const create = (): redis.RedisClient => {
     const port = rtg.port ? +rtg.port : 0;
 
     client = redis.createClient(port, rtg.hostname || undefined);
+
+    const password = rtg?.auth?.split(':')?.[1] || '';
+
+    client.auth(password);
   } else {
     client = redis.createClient();
   }
