@@ -3,11 +3,14 @@ import redis from 'redis';
 import redisClient from './common/redisClient';
 import LastFmClient from './LastFmClient/LastFmClient';
 import telegramMessage from './common/telegramMessage';
+import environment from './common/environment';
 
 class WhatsPlayingBot extends TelegramBot {
   private lastFmClient: LastFmClient;
 
   private redisClient: redis.RedisClient;
+
+  private allowedGroupIds: number[];
 
   constructor(
     apiKey: string,
@@ -20,11 +23,16 @@ class WhatsPlayingBot extends TelegramBot {
     this.lastFmClient = new LastFmClient(apiKey, sharedSecret);
     this.redisClient = redisClient.create();
 
+    const environmentConfigured = environment.get();
+
+    this.allowedGroupIds = environmentConfigured.groupChatIds.split('_').map((id) => +id);
+
     this.handleStart = this.handleStart.bind(this);
     this.handleHelp = this.handleHelp.bind(this);
     this.handleSetUser = this.handleSetUser.bind(this);
     this.handleDeleteUser = this.handleDeleteUser.bind(this);
     this.handleNowPlaying = this.handleNowPlaying.bind(this);
+    this.isChatIdValid = this.isChatIdValid.bind(this);
   }
 
   public startListening(): void {
@@ -36,7 +44,15 @@ class WhatsPlayingBot extends TelegramBot {
   }
 
   private handleStart(message: TelegramBot.Message): void {
-    const chatId = message.chat.id;
+    const chatId = telegramMessage.getChatId(message);
+
+    const allowedChat = this.isChatIdValid(chatId);
+
+    if (!allowedChat) {
+      console.info(`Chat not allowed for ${chatId}.`);
+
+      return;
+    }
 
     const replyMessage = "Hello, this is What's Playing Bot!";
 
@@ -44,7 +60,15 @@ class WhatsPlayingBot extends TelegramBot {
   }
 
   private handleHelp(message: TelegramBot.Message): void {
-    const chatId = message.chat.id;
+    const chatId = telegramMessage.getChatId(message);
+
+    const allowedChat = this.isChatIdValid(chatId);
+
+    if (!allowedChat) {
+      console.info(`Chat not allowed for ${chatId}.`);
+
+      return;
+    }
 
     const replyMessage =
       "Hello, this is What's Playing Bot, a bot for Last FM! \n\n" +
@@ -59,9 +83,17 @@ class WhatsPlayingBot extends TelegramBot {
     message: TelegramBot.Message,
     match: RegExpExecArray | null,
   ): Promise<void> {
-    const chatId = message.chat.id;
-    const telegramUsername = message.chat.username;
+    const chatId = telegramMessage.getChatId(message);
+    const telegramUsername = telegramMessage.getUsername(message);
     const lastFmUsername = match?.[1];
+
+    const allowedChat = this.isChatIdValid(chatId);
+
+    if (!allowedChat) {
+      console.info(`Chat not allowed for ${chatId}.`);
+
+      return;
+    }
 
     if (telegramUsername == null || lastFmUsername == null) {
       this.sendMessage(chatId, 'Please set a valid Telegram username.');
@@ -87,8 +119,16 @@ class WhatsPlayingBot extends TelegramBot {
   }
 
   private async handleDeleteUser(message: TelegramBot.Message): Promise<void> {
-    const chatId = message.chat.id;
-    const telegramUsername = message.chat.username;
+    const chatId = telegramMessage.getChatId(message);
+    const telegramUsername = telegramMessage.getUsername(message);
+
+    const allowedChat = this.isChatIdValid(chatId);
+
+    if (!allowedChat) {
+      console.info(`Chat not allowed for ${chatId}.`);
+
+      return;
+    }
 
     if (telegramUsername == null) {
       this.sendMessage(chatId, 'Please set a valid Telegram username.');
@@ -112,8 +152,16 @@ class WhatsPlayingBot extends TelegramBot {
   }
 
   private async handleNowPlaying(message: TelegramBot.Message): Promise<void> {
-    const chatId = message.chat.id;
-    const telegramUsername = message.chat.username;
+    const chatId = telegramMessage.getChatId(message);
+    const telegramUsername = telegramMessage.getUsername(message);
+
+    const allowedChat = this.isChatIdValid(chatId);
+
+    if (!allowedChat) {
+      console.info(`Chat not allowed for ${chatId}.`);
+
+      return;
+    }
 
     if (telegramUsername == null) {
       this.sendMessage(chatId, 'Please set a valid Telegram username.');
@@ -145,6 +193,10 @@ class WhatsPlayingBot extends TelegramBot {
       : `${replyName} last listened to ${songName}.`;
 
     this.sendMessage(chatId, replyMessage);
+  }
+
+  private isChatIdValid(chatId: number): boolean {
+    return this.allowedGroupIds.some((id) => id === chatId);
   }
 }
 

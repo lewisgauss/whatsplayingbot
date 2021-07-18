@@ -12,6 +12,7 @@ const get = (): IEnvironment => ({
   redisToGoUrl: process.env.REDISTOGO_URL || '',
   port: process.env.PORT ? +process.env.PORT : 443,
   host: process.env.HOST || '0.0.0.0',
+  groupChatIds: process.env.GROUP_CHAT_IDS || '',
 });
 
 export default {
