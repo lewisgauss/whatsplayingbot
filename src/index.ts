@@ -3,13 +3,9 @@ import WhatsPlayingBot from './WhatsPlayingBot';
 
 console.info("Getting What's Playing Bot ready...");
 
-console.info(process.env);
-
 environment.configure();
 
 const environmentConfigured = environment.get();
-
-console.info(`Environment: ${JSON.stringify(environmentConfigured)}`);
 
 const whatsPlayingBot =
   environmentConfigured.nodeEnv === 'production'
