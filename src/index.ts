@@ -15,6 +15,7 @@ const whatsPlayingBot = new WhatsPlayingBot(
   environmentConfigured.telegramBotToken,
   {
     polling: true,
+    filepath: false,
   },
 );
 

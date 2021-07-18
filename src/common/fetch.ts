@@ -6,11 +6,11 @@ const get = async <T>(url: string): Promise<T> => {
 
     const response = await fetch(encodedUrl);
 
-    if (!response.ok) {
-      throw new Error(`Response not OK: ${response}`);
-    }
-
     const json = await response.json();
+
+    if (!response.ok) {
+      throw new Error(`Response not OK: ${JSON.stringify(json)}`);
+    }
 
     console.log(JSON.stringify(json));
 

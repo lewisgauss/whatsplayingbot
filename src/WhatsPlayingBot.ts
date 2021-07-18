@@ -2,6 +2,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import redis from 'redis';
 import redisClient from './common/redisClient';
 import LastFmClient from './LastFmClient/LastFmClient';
+import telegramMessage from './common/telegramMessage';
 
 class WhatsPlayingBot extends TelegramBot {
   private lastFmClient: LastFmClient;
@@ -19,13 +20,39 @@ class WhatsPlayingBot extends TelegramBot {
     this.lastFmClient = new LastFmClient(apiKey, sharedSecret);
     this.redisClient = redisClient.create();
 
+    this.handleStart = this.handleStart.bind(this);
+    this.handleHelp = this.handleHelp.bind(this);
     this.handleSetUser = this.handleSetUser.bind(this);
+    this.handleDeleteUser = this.handleDeleteUser.bind(this);
     this.handleNowPlaying = this.handleNowPlaying.bind(this);
   }
 
   public startListening(): void {
+    this.onText(/\/start/, this.handleStart);
+    this.onText(/\/help/, this.handleHelp);
     this.onText(/\/setuser (.+)/, this.handleSetUser);
+    this.onText(/\/deleteuser/, this.handleDeleteUser);
     this.onText(/\/np/, this.handleNowPlaying);
+  }
+
+  private handleStart(message: TelegramBot.Message): void {
+    const chatId = message.chat.id;
+
+    const replyMessage = "Hello, this is What's Playing Bot!";
+
+    this.sendMessage(chatId, replyMessage);
+  }
+
+  private handleHelp(message: TelegramBot.Message): void {
+    const chatId = message.chat.id;
+
+    const replyMessage =
+      "Hello, this is What's Playing Bot, a bot for Last FM! \n\n" +
+      'Send /setuser to set your Last FM username. \n' +
+      'Send /np to get your now playing or most recent track. \n' +
+      'Send /deleteuser to delete your Last FM username.';
+
+    this.sendMessage(chatId, replyMessage);
   }
 
   private async handleSetUser(
@@ -45,14 +72,43 @@ class WhatsPlayingBot extends TelegramBot {
     const user = await this.lastFmClient.getUserInfo(lastFmUsername);
 
     if (user == null) {
-      this.sendMessage(chatId, 'Please set a valid Last.fm username.');
+      this.sendMessage(chatId, 'Please enter a valid Last FM username.');
 
       return;
     }
 
-    await this.redisClient.setAsync(telegramUsername, 'yeowwwai');
+    const replyName = telegramMessage.getReplyName(message);
 
-    this.sendMessage(chatId, `Your Last.fm username is set to yeowwwai.`);
+    await this.redisClient.setAsync(telegramUsername, lastFmUsername);
+
+    const replyMessage = `Las FM username ${lastFmUsername} is set for ${replyName}.`;
+
+    this.sendMessage(chatId, replyMessage);
+  }
+
+  private async handleDeleteUser(message: TelegramBot.Message): Promise<void> {
+    const chatId = message.chat.id;
+    const telegramUsername = message.chat.username;
+
+    if (telegramUsername == null) {
+      this.sendMessage(chatId, 'Please set a valid Telegram username.');
+
+      return;
+    }
+
+    const lastFmUsername = await this.redisClient.getAsync(telegramUsername);
+
+    const replyName = telegramMessage.getReplyName(message);
+
+    if (lastFmUsername == null) {
+      this.sendMessage(chatId, `${replyName} does not have a Last FM username set.`);
+
+      return;
+    }
+
+    this.redisClient.del(telegramUsername);
+
+    this.sendMessage(chatId, `Successfully deleted Last FM username for ${replyName}.`);
   }
 
   private async handleNowPlaying(message: TelegramBot.Message): Promise<void> {
@@ -68,12 +124,12 @@ class WhatsPlayingBot extends TelegramBot {
     const lastFmUsername = await this.redisClient.getAsync(telegramUsername);
 
     if (lastFmUsername == null) {
-      this.sendMessage(chatId, 'Please set a valid Last.fm username.');
+      this.sendMessage(chatId, 'Please set a valid Last FM username.');
 
       return;
     }
 
-    const replyName = message.chat.first_name || message.chat.username || 'Unknown User';
+    const replyName = telegramMessage.getReplyName(message);
     const mostRecentTrack = await this.lastFmClient.getMostRecentTrack(lastFmUsername);
 
     if (mostRecentTrack == null) {
