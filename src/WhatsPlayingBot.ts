@@ -38,7 +38,7 @@ class WhatsPlayingBot extends TelegramBot {
   public startListening(): void {
     this.onText(/\/start/, this.handleStart);
     this.onText(/\/help/, this.handleHelp);
-    this.onText(/\/setuser (.+)/, this.handleSetUser);
+    this.onText(/\/setuser/, this.handleSetUser);
     this.onText(/\/deleteuser/, this.handleDeleteUser);
     this.onText(/\/np/, this.handleNowPlaying);
   }
