@@ -92,7 +92,13 @@ class WhatsPlayingBot extends TelegramBot {
       return;
     }
 
-    if (telegramUsername == null || lastFmUsername == null) {
+    if (lastFmUsername == null) {
+      this.sendMessage(chatId, 'Please set a valid Last.FM username.');
+
+      return;
+    }
+
+    if (telegramUsername == null) {
       this.sendMessage(chatId, 'Please set a valid Telegram username.');
 
       return;
