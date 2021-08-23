@@ -82,7 +82,7 @@ class WhatsPlayingBot extends TelegramBot {
   private async handleSetUser(message: TelegramBot.Message): Promise<void> {
     const chatId = telegramMessage.getChatId(message);
     const telegramUsername = telegramMessage.getUsername(message);
-    const lastFmUsername = message.split(' ')[1];
+    const lastFmUsername = message.message.split(' ')[1];
 
     const allowedChat = this.isChatIdValid(chatId);
 
