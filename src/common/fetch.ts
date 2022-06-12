@@ -14,7 +14,7 @@ const get = async <T>(url: string): Promise<T> => {
 
     console.log(JSON.stringify(json));
 
-    return json;
+    return json as T;
   } catch (error) {
     console.error(error);
 
