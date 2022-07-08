@@ -6,7 +6,7 @@ const create = (): IRedisClient => {
 
   const environmentConfigured = environment.get();
 
-  if (environmentConfigured.nodeEnv === 'production') {
+  if (environmentConfigured.nodeEnv !== 'production') {
     client = createClient();
   } else {
     client = createClient({
