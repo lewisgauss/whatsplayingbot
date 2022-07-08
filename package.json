@@ -1,5 +1,6 @@
 {
   "name": "whatsplayingbot",
+  "type": "module",
   "version": "0.0.1",
   "description": "Last.fm bot for Telegram",
   "author": "Lewis Chan",
@@ -18,7 +19,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "debug": "NODE_ENV=development ts-node ./src/index.ts",
+    "debug": "NODE_ENV=development ts-node --esm --experimental-specifier-resolution=node ./src/index.ts",
     "prepare": "husky install",
     "prettier": "prettier --config .prettierrc.json --write \"src/**/*{.ts,.js}\"",
     "start": "NODE_ENV=production node ./build/index.js"
@@ -40,10 +41,9 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@types/node-fetch": "^2.6.2",
     "@types/node-telegram-bot-api": "^0.57.1",
     "dotenv": "^16.0.1",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^3.2.6",
     "node-telegram-bot-api": "^0.58.0",
     "redis": "^4.2.0"
   },

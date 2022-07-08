@@ -1,12 +1,12 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
     "sourceMap": true,
     "strict": true,
     "baseUrl": "./",
-    "types": ["@types/node", "@types/node-fetch", "@types/node-telegram-bot-api"],
+    "types": ["@types/node", "@types/node-telegram-bot-api"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
