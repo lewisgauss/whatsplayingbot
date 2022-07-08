@@ -6,7 +6,7 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": "./",
-    "types": ["@types/node", "@types/node-fetch", "@types/redis", "@types/node-telegram-bot-api"],
+    "types": ["@types/node", "@types/node-fetch", "@types/node-telegram-bot-api"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

@@ -239,15 +239,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/redis@npm:^4.0.11":
-  version: 4.0.11
-  resolution: "@types/redis@npm:4.0.11"
-  dependencies:
-    redis: "*"
-  checksum: 4b2d252368a7dc78738a98a8bcc817f92ca097511a901427628566f24f53998a2b1b524a85dea6a19307d4a95b55bd7d5a6ad7cc944ae8f39e54ca2f28ddf893
-  languageName: node
-  linkType: hard
-
 "@types/request@npm:*":
   version: 2.48.8
   resolution: "@types/request@npm:2.48.8"
@@ -2514,7 +2505,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redis@npm:*, redis@npm:^4.2.0":
+"redis@npm:^4.2.0":
   version: 4.2.0
   resolution: "redis@npm:4.2.0"
   dependencies:
@@ -3193,7 +3184,6 @@ __metadata:
     "@types/node": ^18.0.3
     "@types/node-fetch": ^2.6.2
     "@types/node-telegram-bot-api": ^0.57.1
-    "@types/redis": ^4.0.11
     "@typescript-eslint/eslint-plugin": ^5.30.5
     "@typescript-eslint/parser": ^5.30.5
     dotenv: ^16.0.1

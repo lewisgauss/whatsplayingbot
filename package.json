@@ -42,7 +42,6 @@
   "dependencies": {
     "@types/node-fetch": "^2.6.2",
     "@types/node-telegram-bot-api": "^0.57.1",
-    "@types/redis": "^4.0.11",
     "dotenv": "^16.0.1",
     "node-fetch": "^2.6.7",
     "node-telegram-bot-api": "^0.58.0",
