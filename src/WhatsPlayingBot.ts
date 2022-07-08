@@ -1,5 +1,5 @@
 import TelegramBot from 'node-telegram-bot-api';
-import redis from 'redis';
+import { IRedisClient } from 'redis';
 import redisClient from './common/redisClient';
 import LastFmClient from './LastFmClient/LastFmClient';
 import telegramMessage from './common/telegramMessage';
@@ -8,7 +8,7 @@ import environment from './common/environment';
 class WhatsPlayingBot extends TelegramBot {
   private lastFmClient: LastFmClient;
 
-  private redisClient: redis.RedisClient;
+  private redisClient: IRedisClient;
 
   private allowedGroupIds: number[];
 
@@ -114,7 +114,7 @@ class WhatsPlayingBot extends TelegramBot {
 
     const replyName = telegramMessage.getReplyName(message);
 
-    await this.redisClient.setAsync(telegramUsername, lastFmUsername);
+    await this.redisClient.set(telegramUsername, lastFmUsername);
 
     const replyMessage = `Last FM username ${lastFmUsername} is set for ${replyName}.`;
 
@@ -139,7 +139,7 @@ class WhatsPlayingBot extends TelegramBot {
       return;
     }
 
-    const lastFmUsername = await this.redisClient.getAsync(telegramUsername);
+    const lastFmUsername = await this.redisClient.get(telegramUsername);
 
     const replyName = telegramMessage.getReplyName(message);
 
@@ -172,7 +172,7 @@ class WhatsPlayingBot extends TelegramBot {
       return;
     }
 
-    const lastFmUsername = await this.redisClient.getAsync(telegramUsername);
+    const lastFmUsername = await this.redisClient.get(telegramUsername);
 
     if (lastFmUsername == null) {
       this.sendMessage(chatId, 'Please set a valid Last FM username.');

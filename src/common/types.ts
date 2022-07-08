@@ -4,17 +4,14 @@ export interface IEnvironment {
   readonly lastFmSecretKey: string;
   readonly nodeEnv: string;
   readonly herokuUrl: string;
-  readonly redisToGoUrl: string;
   readonly port: number;
   readonly host: string;
   readonly groupChatIds: string;
+  readonly redisUrl: string;
 }
 
 declare module 'redis' {
-  export interface RedisClient {
-    setAsync(key: string, value: string): Promise<unknown>;
-    getAsync(key: string): Promise<string | null>;
-  }
+  type IRedisClient = ReturnType<typeof createClient>;
 }
 
 interface IUserRegistrationInfo {

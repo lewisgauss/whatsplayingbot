@@ -9,10 +9,10 @@ const get = (): IEnvironment => ({
   lastFmSecretKey: process.env.LAST_FM_SHARED_SECRET || '',
   nodeEnv: process.env.NODE_ENV || 'development',
   herokuUrl: process.env.HEROKU_URL || '',
-  redisToGoUrl: process.env.REDISTOGO_URL || '',
   port: process.env.PORT ? +process.env.PORT : 443,
   host: process.env.HOST || '0.0.0.0',
   groupChatIds: process.env.GROUP_CHAT_IDS || '',
+  redisUrl: process.env.REDIS_URL || '',
 });
 
 export default {

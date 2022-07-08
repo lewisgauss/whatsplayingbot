@@ -1,29 +1,24 @@
-import redis from 'redis';
-import { promisify } from 'util';
-import url from 'url';
+import { createClient, IRedisClient } from 'redis';
 import environment from './environment';
 
-const create = (): redis.RedisClient => {
-  let client: redis.RedisClient;
+const create = (): IRedisClient => {
+  let client: IRedisClient;
 
   const environmentConfigured = environment.get();
 
-  if (environmentConfigured.nodeEnv === 'production') {
-    const rtg = url.parse(environmentConfigured.redisToGoUrl);
-
-    const port = rtg.port ? +rtg.port : 0;
-
-    client = redis.createClient(port, rtg.hostname || undefined);
-
-    const password = rtg?.auth?.split(':')?.[1] || '';
-
-    client.auth(password);
+  if (environmentConfigured.nodeEnv !== 'production') {
+    client = createClient();
   } else {
-    client = redis.createClient();
+    client = createClient({
+      url: environmentConfigured.redisUrl,
+      socket: {
+        tls: true,
+        rejectUnauthorized: false,
+      },
+    });
   }
 
-  client.getAsync = promisify(client.get).bind(client);
-  client.setAsync = promisify(client.set).bind(client);
+  client.connect();
 
   return client;
 };
