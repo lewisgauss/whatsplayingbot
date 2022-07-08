@@ -6,11 +6,11 @@ const create = (): IRedisClient => {
 
   const environmentConfigured = environment.get();
 
-  if (environmentConfigured.nodeEnv !== 'production') {
+  if (environmentConfigured.nodeEnv === 'production') {
     client = createClient();
   } else {
     client = createClient({
-      url: environmentConfigured.redisUrl,
+      url: environmentConfigured.redisTlsUrl,
       socket: {
         tls: true,
         rejectUnauthorized: false,
