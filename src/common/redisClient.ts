@@ -18,6 +18,10 @@ const create = (): IRedisClient => {
     });
   }
 
+  client.on('error', function (error) {
+    console.error(error);
+  });
+
   client.connect();
 
   return client;
