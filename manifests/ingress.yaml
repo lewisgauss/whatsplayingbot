@@ -9,13 +9,13 @@ metadata:
 spec:
   tls:
   - hosts:
-    - k8s.lewischan.dev
+    - wpb.lewischan.dev
     secretName: k8s-lewischan-dev-secret
   rules:
-  - host: k8s.lewischan.dev
+  - host: wpb.lewischan.dev
     http:
       paths:
-      - path: /whats-playing-bot
+      - path: /
         pathType: Prefix
         backend:
           service:
