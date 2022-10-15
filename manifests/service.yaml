@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: whats-playing-bot
+    namespace: whats-playing-bot
+spec:
+    type: ClusterIP
+    ports:
+    - port: 443
+      targetPort: 443
+    selector:
+        app: whats-playing-bot

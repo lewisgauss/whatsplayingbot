@@ -1,0 +1,27 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: whats-playing-bot
+  namespace: whats-playing-bot
+spec:
+  selector:
+    matchLabels:
+      app: whats-playing-bot
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: whats-playing-bot
+    spec:
+      containers:
+        - name: whats-playing-bot
+          image: docker.io/lewisgauss/whats-playing-bot:main
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 64m
+            limits:
+              memory: 128Mi
+              cpu: 128m
+          ports:
+          - containerPort: 443

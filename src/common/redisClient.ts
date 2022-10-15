@@ -10,11 +10,7 @@ const create = (): IRedisClient => {
     client = createClient();
   } else {
     client = createClient({
-      url: environmentConfigured.redisTlsUrl,
-      socket: {
-        tls: true,
-        rejectUnauthorized: false,
-      },
+      url: environmentConfigured.redisUrl,
     });
   }
 

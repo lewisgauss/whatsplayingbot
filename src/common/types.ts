@@ -3,11 +3,11 @@ export interface IEnvironment {
   readonly lastFmApiKey: string;
   readonly lastFmSecretKey: string;
   readonly nodeEnv: string;
-  readonly herokuUrl: string;
+  readonly appUrl: string;
   readonly port: number;
   readonly host: string;
   readonly groupChatIds: string;
-  readonly redisTlsUrl: string;
+  readonly redisUrl: string;
 }
 
 declare module 'redis' {

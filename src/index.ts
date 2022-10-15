@@ -33,7 +33,7 @@ const whatsPlayingBot =
 
 if (environmentConfigured.nodeEnv === 'production') {
   whatsPlayingBot.setWebHook(
-    `${environmentConfigured.herokuUrl}:443/bot${environmentConfigured.telegramBotToken}`,
+    `${environmentConfigured.appUrl}/bot${environmentConfigured.telegramBotToken}`,
   );
 }
 
