@@ -71,13 +71,11 @@ jobs:
         run: |
           touch .env
           echo GROUP_CHAT_IDS=${{ secrets.GROUP_CHAT_IDS }} >> .env
-          echo HEROKU_URL=${{ secrets.HEROKU_URL }} >> .env
+          echo APP_URL=${{ secrets.APP_URL }} >> .env
           echo LAST_FM_API_KEY=${{ secrets.LAST_FM_API_KEY }} >> .env
           echo LAST_FM_SHARED_SECRET=${{ secrets.LAST_FM_SHARED_SECRET }} >> .env
           echo NTBA_FIX_319=1 >> .env
-          echo REDISTOGO_URL=${{ secrets.REDISTOGO_URL }} >> .env
           echo TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} >> .env
-          echo REDIS_TLS_URL=${{ secrets.REDIS_TLS_URL }} >> .env
           echo REDIS_URL=${{ secrets.REDIS_URL }} >> .env
 
       # Build and push Docker image with Buildx (don't push on PR)
