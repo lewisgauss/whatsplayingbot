@@ -8,6 +8,7 @@ export interface IEnvironment {
   readonly host: string;
   readonly groupChatIds: string;
   readonly redisUrl: string;
+  readonly redisPassword: string;
 }
 
 declare module 'redis' {

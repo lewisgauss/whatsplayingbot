@@ -11,6 +11,7 @@ const create = (): IRedisClient => {
   } else {
     client = createClient({
       url: environmentConfigured.redisUrl,
+      password: environmentConfigured.redisPassword,
     });
   }
 

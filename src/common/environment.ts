@@ -13,6 +13,7 @@ const get = (): IEnvironment => ({
   host: process.env.HOST || '0.0.0.0',
   groupChatIds: process.env.GROUP_CHAT_IDS || '',
   redisUrl: process.env.REDIS_URL || '',
+  redisPassword: process.env.REDIS_PASSWORD || '',
 });
 
 export default {

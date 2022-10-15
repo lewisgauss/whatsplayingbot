@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: whats-playing-bot
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -17,9 +17,6 @@ spec:
         - name: whats-playing-bot
           image: docker.io/lewisgauss/whats-playing-bot:main
           resources:
-            requests:
-              memory: 64Mi
-              cpu: 64m
             limits:
               memory: 128Mi
               cpu: 128m
