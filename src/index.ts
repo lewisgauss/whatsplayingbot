@@ -7,6 +7,8 @@ environment.configure();
 
 const environmentConfigured = environment.get();
 
+console.info(environmentConfigured);
+
 const whatsPlayingBot =
   environmentConfigured.nodeEnv === 'production'
     ? new WhatsPlayingBot(
