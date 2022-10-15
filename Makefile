@@ -21,3 +21,8 @@ reset: ensure-node-version
 delete-build: ensure-node-version
 		@echo "Deleting build folder..."
 		rm -rf build
+
+.PHONY: build-docker
+build-docker:
+		@echo "Building docker image"
+		docker build . -t whats-playing-bot:$(version)
