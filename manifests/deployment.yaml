@@ -15,8 +15,7 @@ spec:
     spec:
       containers:
         - name: whats-playing-bot
-          image: docker.io/lewisgauss/whats-playing-bot:main
-          imagePullPolicy: Always
+          image: docker.io/lewisgauss/whats-playing-bot:latest
           resources:
             limits:
               memory: 128Mi
