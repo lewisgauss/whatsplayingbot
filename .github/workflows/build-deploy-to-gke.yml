@@ -112,6 +112,9 @@ jobs:
     name: Deploy to GKE
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      # Give permission to update yaml file
+      contents: write
     
     steps:
     - name: Checkout
