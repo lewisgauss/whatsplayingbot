@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - wpb.lewischan.dev
-    secretName: k8s-lewischan-dev-secret
+    secretName: whats-playing-bot-tls-secret
   rules:
   - host: wpb.lewischan.dev
     http:
