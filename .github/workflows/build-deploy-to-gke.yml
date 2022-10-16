@@ -135,10 +135,15 @@ jobs:
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_SA_KEY }}
         
+    # Extract metadata (tags, labels) for Docker
+    - name: Extract Docker metadata
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        
     # Update image version in deployment.yaml
     - run: |-
         echo "${{ steps.meta.outputs.tags }}"
-        docker run --rm -v "${PWD}":/workdir mikefarah/yq -i '.spec.template.spec.containers[0].image="docker.io/lewisgauss/whats-playing-bot:${{ steps.meta.outputs.tags }}""' ./manifests/deployment.yaml
+        docker run --rm -v "${PWD}":/workdir mikefarah/yq -i '.spec.template.spec.containers[0].image="$REGISTRY/$IMAGE_NAME:${{ steps.meta.outputs.tags }}""' ./manifests/deployment.yaml
     
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
