@@ -153,4 +153,4 @@ jobs:
       run: |-
         kubectl apply -n $DEPLOYMENT_NAME -f manifests
         kubectl rollout status deployment/$DEPLOYMENT_NAME
-        kubectl get services -o wide
+        kubectl get services -n $DEPLOYMENT_NAME -o wide
