@@ -22,7 +22,7 @@ env:
   DEPLOYMENT_NAME: whats-playing-bot
 
 jobs:
-  build:
+  build-and-push:
     name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
     environment: production
@@ -108,6 +108,7 @@ jobs:
         run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
 
   publish-to-gke:
+    needs: build-and-push
     name: Deploy to GKE
     runs-on: ubuntu-latest
     environment: production
