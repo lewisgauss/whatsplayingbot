@@ -143,9 +143,6 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         
     # Update image version in deployment.yaml
-    - run: |-
-        docker run --rm -v "${PWD}":/workdir mikefarah/yq -i '.spec.template.spec.containers[0].image="$REGISTRY/$IMAGE_NAME:${{ steps.meta.outputs.tags }}"' ./manifests/deployment.yaml
-    
     - name: Update image version in deployment.yaml
       uses: mikefarah/yq@master
       with:
