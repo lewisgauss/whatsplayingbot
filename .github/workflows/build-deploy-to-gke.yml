@@ -112,9 +112,6 @@ jobs:
     name: Deploy to GKE
     runs-on: ubuntu-latest
     environment: production
-    permissions:
-      # Give permission to update yaml file
-      contents: write
     
     steps:
     - name: Checkout
@@ -148,6 +145,11 @@ jobs:
     # Update image version in deployment.yaml
     - run: |-
         docker run --rm -v "${PWD}":/workdir mikefarah/yq -i '.spec.template.spec.containers[0].image="$REGISTRY/$IMAGE_NAME:${{ steps.meta.outputs.tags }}"' ./manifests/deployment.yaml
+    
+    - name: Update image version in deployment.yaml
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq -i '.spec.template.spec.containers[0].image = "$REGISTRY/$IMAGE_NAME:${{ steps.meta.outputs.tags }}"' './manifests/deployment.yaml'
     
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
