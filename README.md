@@ -17,9 +17,17 @@ For the ease of modification, they're listed below:
 
 ```shell
 GROUP_CHAT_IDS # A list of ids separated by '_'
-HEROKU_URL # Heroku app url for Telegram bot webhooks
+APP_URL # App URL for Telegram bot webhooks
 LAST_FM_API_KEY # Last FM API key
 LAST_FM_SHARED_SECRET # Last FM API shared secret
 REDISTOGO_URL # Redis To Go URL
 TELEGRAM_BOT_TOKEN # Telegram bot token
+REDIS_URL # Redis URL with port, for example redis://redis.service.local:1000
+REDIS_PASSWORD # Redis auth password
 ```
+
+## Deployment
+
+This application is compiled to a Docker image and deployed to a GKE cluster.
+
+[Docker Hub repository](https://hub.docker.com/r/lewisgauss/whats-playing-bot).
