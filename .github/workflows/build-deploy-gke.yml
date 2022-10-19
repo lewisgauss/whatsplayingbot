@@ -123,6 +123,7 @@ jobs:
       with:
         workload_identity_provider: ${{ secrets.GKE_WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ secrets.GKE_SERVICE_ACCOUNT }}
+        token_format: access_token
         
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v0
