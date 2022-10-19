@@ -2,6 +2,8 @@
 
 Last.fm bot for Telegram written in Node.js with TypeScript.
 
+[![Build Docker image and deploy to GKE](https://github.com/lwschan/whatsplayingbot/actions/workflows/build-deploy-gke.yml/badge.svg)](https://github.com/lwschan/whatsplayingbot/actions/workflows/build-deploy-gke.yml)
+
 ## Node version
 
 If you wish to modify the NodeJs version, you need go change it in both:
