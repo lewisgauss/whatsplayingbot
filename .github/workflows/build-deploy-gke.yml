@@ -109,6 +109,10 @@ jobs:
     name: Deploy to GKE
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      # Permissions for google-github-actions/auth
+      contents: read
+      id-token: write
     
     steps:
     - name: Checkout
