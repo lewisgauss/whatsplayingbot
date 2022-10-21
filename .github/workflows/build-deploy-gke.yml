@@ -143,3 +143,15 @@ jobs:
         kubectl apply -n $DEPLOYMENT_NAME -f manifests
         kubectl rollout status -n $DEPLOYMENT_NAME deployment/$DEPLOYMENT_NAME
         kubectl get services -n $DEPLOYMENT_NAME -o wide
+      
+    # Notify Slack releases channel
+    - name: Post to a Slack channel
+      id: slack
+      uses: slackapi/slack-github-action@v1
+      with:
+        channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+        slack-message: "Successfully deployed What's Playing Bot version ${{  github.ref_name }} to GKE.\nhttps://github.com/lwschan/whats-playing-bot/actions/runs/${{ github.run_id }}"
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        
+    
