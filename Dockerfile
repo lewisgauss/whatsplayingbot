@@ -1,5 +1,5 @@
 # First stage
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 ENV NODE_ENV=development
 WORKDIR /source
 COPY . .
@@ -10,7 +10,7 @@ RUN rm -rf node_modules
 RUN yarn workspaces focus --production
 
 # Second stage
-FROM node:16-alpine
+FROM node:18-alpine
 WORKDIR /app
 COPY --from=build /source/.env /source/build /source/package.json /app/
 COPY --from=build /source/node_modules /app/node_modules
