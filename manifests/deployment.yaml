@@ -17,8 +17,10 @@ spec:
         - name: whats-playing-bot
           image: docker.io/lewisgauss/whats-playing-bot:latest
           resources:
+            requests:
+              memory: 40Mi
+              cpu: 25m
             limits:
-              memory: 64Mi
-              cpu: 50m
+              memory: 40Mi
           ports:
           - containerPort: 443
