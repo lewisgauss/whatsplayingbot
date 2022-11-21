@@ -14,9 +14,6 @@
     "url": "https://github.com/lewisgauss/whatsplayingbot/issues"
   },
   "main": "./src/index.ts",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "build": "tsc",
     "debug": "NODE_ENV=development ts-node --esm --experimental-specifier-resolution=node ./src/index.ts",
@@ -27,9 +24,9 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
     "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
-    "eslint": "^8.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "eslint": "^8.28.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -38,7 +35,7 @@
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "@types/node-telegram-bot-api": "^0.57.6",
