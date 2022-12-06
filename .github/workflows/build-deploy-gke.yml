@@ -118,18 +118,6 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
 
-    # Create `.env` file
-    - name: Create .env file
-      run: |
-        touch .env
-        echo GROUP_CHAT_IDS=${{ secrets.GROUP_CHAT_IDS }} >> .env
-        echo APP_URL=${{ secrets.APP_URL }} >> .env
-        echo LAST_FM_API_KEY=${{ secrets.LAST_FM_API_KEY }} >> .env
-        echo LAST_FM_SHARED_SECRET=${{ secrets.LAST_FM_SHARED_SECRET }} >> .env
-        echo TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} >> .env
-        echo REDIS_URL=${{ secrets.REDIS_URL }} >> .env
-        echo REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} >> .env
-
     # Update image version in deployment.yaml
     - name: Update image version and environment variables in deployment.yaml
       uses: mikefarah/yq@master
@@ -143,7 +131,6 @@ jobs:
           yq -i '.spec.template.spec.containers[0].env += { "name": "TELEGRAM_BOT_TOKEN", "value": "${{ secrets.TELEGRAM_BOT_TOKEN }}" }' './manifests/deployment.yaml'
           yq -i '.spec.template.spec.containers[0].env += { "name": "REDIS_URL", "value": "${{ secrets.REDIS_URL }}" }' './manifests/deployment.yaml'
           yq -i '.spec.template.spec.containers[0].env += { "name": "REDIS_PASSWORD", "value": "${{ secrets.REDIS_PASSWORD }}" }' './manifests/deployment.yaml'
-
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
