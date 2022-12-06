@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - wpb.lewischan.dev
+    - whats-playing-bot.lewischan.dev
     secretName: whats-playing-bot-tls-secret
   rules:
-  - host: wpb.lewischan.dev
+  - host: whats-playing-bot.lewischan.dev
     http:
       paths:
       - path: /
