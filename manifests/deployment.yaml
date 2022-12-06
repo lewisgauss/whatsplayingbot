@@ -16,6 +16,23 @@ spec:
       containers:
         - name: whats-playing-bot
           image: docker.io/lewisgauss/whats-playing-bot:latest
+          env:
+          - name: GROUP_CHAT_IDS
+            value: ""
+          - name: APP_URL
+            value: ""
+          - name: LAST_FM_API_KEY
+            value: ""
+          - name: LAST_FM_SHARED_SECRET
+            value: ""
+          - name: NTBA_FIX_319
+            value: "1"
+          - name: TELEGRAM_BOT_TOKEN
+            value: ""
+          - name: REDIS_URL
+            value: ""
+          - name: REDIS_PASSWORD
+            value: ""
           resources:
             requests:
               memory: 40Mi
