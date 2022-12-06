@@ -12,7 +12,7 @@ spec:
     - wpb.lewischan.dev
     secretName: whats-playing-bot-tls-secret
   rules:
-  - host: whats-playing-bot.lewischan.dev
+  - host: wpb.lewischan.dev
     http:
       paths:
       - path: /
