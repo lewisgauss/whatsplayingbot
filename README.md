@@ -22,7 +22,6 @@ GROUP_CHAT_IDS # A list of ids separated by '_'
 APP_URL # App URL for Telegram bot webhooks
 LAST_FM_API_KEY # Last FM API key
 LAST_FM_SHARED_SECRET # Last FM API shared secret
-REDISTOGO_URL # Redis To Go URL
 TELEGRAM_BOT_TOKEN # Telegram bot token
 REDIS_URL # Redis URL with port, for example redis://redis.service.local:1000
 REDIS_PASSWORD # Redis auth password
