@@ -10,8 +10,8 @@ const getChatId = (message: TelegramBot.Message): number => {
   return message.chat.id;
 };
 
-const getUsername = (message: TelegramBot.Message): string => {
-  return message.from?.username || '';
+const getUserId = (message: TelegramBot.Message): number | undefined => {
+  return message.from?.id;
 };
 
-export default { getReplyName, getChatId, getUsername };
+export default { getReplyName, getChatId, getUserId };

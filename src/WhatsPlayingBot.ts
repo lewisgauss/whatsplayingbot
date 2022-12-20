@@ -4,6 +4,7 @@ import redisClient from './common/redisClient';
 import LastFmClient from './LastFmClient/LastFmClient';
 import telegramMessage from './common/telegramMessage';
 import environment from './common/environment';
+import { getUserIdRedisKey } from './common/utils';
 
 class WhatsPlayingBot extends TelegramBot {
   private lastFmClient: LastFmClient;
@@ -81,7 +82,7 @@ class WhatsPlayingBot extends TelegramBot {
 
   private async handleSetUser(message: TelegramBot.Message): Promise<void> {
     const chatId = telegramMessage.getChatId(message);
-    const telegramUsername = telegramMessage.getUsername(message);
+    const userId = telegramMessage.getUserId(message);
     const lastFmUsername = message.text?.split(' ')[1];
 
     const allowedChat = this.isChatIdValid(chatId);
@@ -98,7 +99,7 @@ class WhatsPlayingBot extends TelegramBot {
       return;
     }
 
-    if (telegramUsername == null) {
+    if (userId == null) {
       this.sendMessage(chatId, 'Please set a valid Telegram username.');
 
       return;
@@ -114,7 +115,8 @@ class WhatsPlayingBot extends TelegramBot {
 
     const replyName = telegramMessage.getReplyName(message);
 
-    await this.redisClient.set(telegramUsername, lastFmUsername);
+    const userRedisKey = getUserIdRedisKey(userId);
+    await this.redisClient.set(userRedisKey, lastFmUsername);
 
     const replyMessage = `Last FM username ${lastFmUsername} is set for ${replyName}.`;
 
@@ -123,8 +125,6 @@ class WhatsPlayingBot extends TelegramBot {
 
   private async handleDeleteUser(message: TelegramBot.Message): Promise<void> {
     const chatId = telegramMessage.getChatId(message);
-    const telegramUsername = telegramMessage.getUsername(message);
-
     const allowedChat = this.isChatIdValid(chatId);
 
     if (!allowedChat) {
@@ -133,14 +133,15 @@ class WhatsPlayingBot extends TelegramBot {
       return;
     }
 
-    if (telegramUsername == null) {
-      this.sendMessage(chatId, 'Please set a valid Telegram username.');
+    const userId = telegramMessage.getUserId(message);
+    if (userId == null) {
+      this.sendMessage(chatId, 'Error, could not retrieve your Telegram user id.');
 
       return;
     }
 
-    const lastFmUsername = await this.redisClient.get(telegramUsername);
-
+    const userRedisKey = getUserIdRedisKey(userId);
+    const lastFmUsername = await this.redisClient.get(userRedisKey);
     const replyName = telegramMessage.getReplyName(message);
 
     if (lastFmUsername == null) {
@@ -149,30 +150,29 @@ class WhatsPlayingBot extends TelegramBot {
       return;
     }
 
-    this.redisClient.del(telegramUsername);
+    this.redisClient.del(userRedisKey);
 
     this.sendMessage(chatId, `Successfully deleted Last FM username for ${replyName}.`);
   }
 
   private async handleNowPlaying(message: TelegramBot.Message): Promise<void> {
     const chatId = telegramMessage.getChatId(message);
-    const telegramUsername = telegramMessage.getUsername(message);
-
     const allowedChat = this.isChatIdValid(chatId);
-
     if (!allowedChat) {
       console.log(`Chat not allowed for ${chatId}.`);
 
       return;
     }
 
-    if (telegramUsername == null) {
+    const userId = telegramMessage.getUserId(message);
+    if (userId == null) {
       this.sendMessage(chatId, 'Please set a valid Telegram username.');
 
       return;
     }
 
-    const lastFmUsername = await this.redisClient.get(telegramUsername);
+    const userRedisKey = getUserIdRedisKey(userId);
+    const lastFmUsername = await this.redisClient.get(userRedisKey);
 
     if (lastFmUsername == null) {
       this.sendMessage(chatId, 'Please set a valid Last FM username.');
